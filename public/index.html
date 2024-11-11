@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 scroll-smooth ">
+
+    <a href="https://wa.me/81338155068" class="fixed bottom-5 right-5 bg-green-500 hover:bg-green-600 text-white rounded-full transform transition duration-300 hover:scale-105 cursor-pointer p-3 shadow-lg z-50" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-8 h-8" />
+    </a>
+    
+    
+
+<!-- Navbar Container -->
+<nav class="bg-white shadow-lg sticky top-0 z-20 px-4 py-3">
+    <div class="container mx-auto flex items-center justify-between">
+        <!-- Logo Section -->
+        <div class="flex items-center">
+            <img src="img/LOGO.png" alt="Logo" class="w-16 h-16 mr-2">
+            <span class="text-3xl font-bold font-Itim text-gray-800">BajuKu</span>
+        </div>
+
+        <!-- Hamburger Menu (visible on mobile) -->
+        <div class="lg:hidden">
+            <button id="menu-btn" class="text-gray-800 focus:outline-none">
+                <i id="menu-icon" class='bx bx-menu text-4xl'></i>
+                <i id="close-icon" class='bx bx-x text-4xl hidden'></i>
+            </button>
+        </div>
+
+        <!-- Navigation Links for Desktop -->
+        <div id="menu" class="hidden lg:flex space-x-8 text-lg font-semibold text-gray-800">
+            <a href="#about" class="hover:text-yellow-500 transform transition duration-300 hover:scale-105">ABOUT</a>
+            <a href="#product" class="hover:text-yellow-500 transform transition duration-300 hover:scale-105">PRODUCT</a>
+            <a href="#popular-product" class="hover:text-yellow-500 transform transition duration-300 hover:scale-105">POPULAR PRODUCT</a>
+            <a href="#gallery" class="hover:text-yellow-500 transform transition duration-300 hover:scale-105">GALLERY</a>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden hidden font-semibold px-4 py-4 space-y-3 text-gray-800 bg-gray-50 shadow-inner rounded-md">
+        <a href="#about" class="block hover:text-yellow-500 hover:bg-gray-200 py-2 px-4 rounded transition duration-300">ABOUT</a>
+        <a href="#product" class="block hover:text-yellow-500 hover:bg-gray-200 py-2 px-4 rounded transition duration-300">PRODUCT</a>
+        <a href="#popular-product" class="block hover:text-yellow-500 hover:bg-gray-200 py-2 px-4 rounded transition duration-300">POPULAR PRODUCT</a>
+        <a href="#gallery" class="block hover:text-yellow-500 hover:bg-gray-200 py-2 px-4 rounded transition duration-300">GALLERY</a>
+    </div>
+</nav>
+
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        mobileMenu.classList.toggle('block');
+        menuIcon.classList.toggle('hidden'); // Hide menu icon
+        closeIcon.classList.toggle('hidden'); // Show close icon
+    });
+</script>
+
+<div class="relative isolate overflow-hidden">
+    <div id="background1" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out filter blur-lg"></div>
+    <div id="background2" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out filter blur-lg opacity-0"></div>
+
+    <div class="mt-[-50px] flex h-screen items-center justify-center relative z-10">
+        <div class="max-w-full flex-shrink-0 px-4 text-center lg:mx-0 lg:max-w-3xl lg:pt-8">
+            <h1 class="mt-10 text-5xl font-bold tracking-tight text-white sm:text-6xl">
+                Custom
+                <span class="text-yellow-500">Clothing Design</span> and
+                <span class="text-yellow-500">Creation Services</span>
+            </h1>
+            <div class="mt-5 flex items-center justify-center gap-x-6">
+                <a href="#product"
+                    class="transition-all duration-300 ease-in-out rounded-md bg-yellow-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-yellow-600 hover:scale-105 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500"
+                    rel="noreferrer">Show Product →</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const backgrounds = [
+        'img/background.jpg',
+        'img/background-banner.jpg',
+        'img/background-3.avif',
+        'img/background-4.avif',
+        'img/background-5.jpeg'
+    ];
+
+    let currentIndex = 0;
+    const background1 = document.getElementById('background1');
+    const background2 = document.getElementById('background2');
+    let isBackground1Active = true;
+
+    // Fungsi untuk mengubah background dengan efek geser
+    function changeBackground() {
+        const currentBackground = backgrounds[currentIndex];
+        const nextBackground = backgrounds[(currentIndex + 1) % backgrounds.length];
+
+        if (isBackground1Active) {
+            background1.style.backgroundImage = `url('${currentBackground}')`;
+            background2.style.backgroundImage = `url('${nextBackground}')`;
+            background2.classList.remove("opacity-0");
+            background1.classList.add("opacity-0");
+        } else {
+            background2.style.backgroundImage = `url('${currentBackground}')`;
+            background1.style.backgroundImage = `url('${nextBackground}')`;
+            background1.classList.remove("opacity-0");
+            background2.classList.add("opacity-0");
+        }
+
+        isBackground1Active = !isBackground1Active;
+        currentIndex = (currentIndex + 1) % backgrounds.length;
+    }
+
+    // Ubah background setiap 5 detik
+    setInterval(changeBackground, 5000);
+
+    // Set background awal
+    background1.style.backgroundImage = `url('${backgrounds[0]}')`;
+    background2.style.backgroundImage = `url('${backgrounds[1]}')`;
+</script>
+
+<style>
+    /* Efek transisi opacity dan blur */
+    .transition-opacity {
+        transition: opacity 1s ease-in-out;
+    }
+    /* Efek blur yang diterapkan pada setiap background */
+    .filter {
+        filter: blur(8px);
+    }
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+
+
+
+<section id="about">
+<div class="sm:flex items-center max-w-screen-xl mx-auto p-5">
+    <div class="sm:w-1/2 p-10">
+        <div class="image object-center text-center transition-transform transform hover:scale-105">
+            <img src="img/pakaian tanpa latar belakang.png" alt="Custom Clothing">
+        </div>
+    </div>
+    <div class="sm:w-1/2 p-5 bg-gray-100 rounded-lg shadow-md">
+        <div class="text">
+            <h2 class="my-4 font-bold text-3xl sm:text-4xl text-gray-800 transition-colors duration-300 hover:text-yellow-500">
+                What is <span class="text-yellow-500">BajuKu?</span>
+            </h2>
+            <p class="text-gray-700">
+                Bajuku is a business that offers custom clothing tailored to your style. With high-quality materials and meticulous craftsmanship, we are committed to delivering satisfying results. Let Bajuku be your partner in creating stylish and comfortable outfits!
+            </p>
+        </div>
+    </div>
+</div>
+</section>
+
+
+<section class="text-gray-600 body-font">
+    <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+        <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Following The Customer's Desires</h1>
+            <p class="mb-8 leading-relaxed">
+                We have prepared various sizes according to the specified guidelines. However, if you do not find a suitable size in our size guide, please feel free to specify your own clothing size. We are committed to providing a solution that meets your needs!
+            </p>
+            <div class="flex justify-center">
+                <button class="inline-flex items-center text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded text-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg">
+                    <i class='bx bx-basket text-2xl mr-2'></i>
+                    <span>Order Now</span>
+                </button>
+                
+                <a href="#popular-product" class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg">
+                    Popular Product
+                </a>
+            </div>
+        </div>
+        <div>
+            <img class="h-72 w-96 object-cover object-center" style="border-top-left-radius: 25%; border-top-right-radius: 0px; border-bottom-left-radius: 0px; border-bottom-right-radius: 25%;"  alt="hero" src="img/tailor.jpg">
+        </div>
+    </div>
+</section>
+
+
+<div class="bg-white">
+    <section id="features" class="relative block px-6 py-10 md:py-20 md:px-10">
+
+        <div class="relative mx-auto max-w-5xl text-center">
+            <span class="text-black my-3 flex items-center justify-center font-medium uppercase tracking-wider">
+                Why choose us
+            </span>
+            <h2 class="block w-full bg-gradient-to-b from-yellow-200 to-yellow-500 bg-clip-text font-bold text-transparent text-3xl sm:text-4xl">
+                Custom Clothing Design and Creation Services
+            </h2>
+            <p class="mx-auto my-4 w-full max-w-full bg-transparent text-center font-medium leading-relaxed tracking-wide text-black">
+                Explore high-quality garments crafted with meticulous attention to detail, ensuring comfort and style in every piece. Our experienced team is committed to transforming your unique ideas into stunning designs that align with current trends while offering personalized solutions that express your individuality. Enjoy responsive customer support throughout your journey, and rest assured that we prioritize sustainability by using eco-friendly materials and ethical production practices.
+            </p>
+        </div>
+
+        <div class="relative mx-auto max-w-7xl grid grid-cols-1 gap-10 pt-14 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="rounded-md border bg-yellow-200 p-8 text-center shadow transition-transform duration-300 transform hover:scale-105 hover:bg-yellow-300">
+                <div class="button-text mx-auto flex h-12 w-12 items-center justify-center rounded-md border"
+                    style="background-image: linear-gradient(to bottom, rgb(255, 230, 0), rgb(255, 200, 0)); border-color: black;">
+                    <i class='bx bx-customize text-2xl'></i>
+                                </div>
+                <h3 class="mt-6 text-black">Customizable</h3>
+                <p class="my-4 mb-0 font-normal leading-relaxed tracking-wide text-black">
+                    The clothing ordered by customers can be fully customized according to their preferences and needs, adding a personal touch to every detail.
+                </p>
+            </div>
+
+            <div class="rounded-md border bg-yellow-200 p-8 text-center shadow transition-transform duration-300 transform hover:scale-105 hover:bg-yellow-300">
+                <div class="button-text mx-auto flex h-12 w-12 items-center justify-center rounded-md border"
+                    style="background-image: linear-gradient(to bottom, rgb(255, 230, 0), rgb(255, 200, 0)); border-color: black;">
+                    <i class='bx bx-timer text-2xl'></i>
+                </div>
+                <h3 class="mt-6 text-black">Fast Work</h3>
+                <p class="my-4 mb-0 font-normal leading-relaxed tracking-wide text-black">
+                    The clothing ordered by customers will be processed as quickly as possible to ensure their satisfaction and meet their expectations. We are committed to providing efficient and timely service.
+                </p>
+            </div>
+
+            <div class="rounded-md border bg-yellow-200 p-8 text-center shadow transition-transform duration-300 transform hover:scale-105 hover:bg-yellow-300">
+                <div class="button-text mx-auto flex h-12 w-12 items-center justify-center rounded-md border"
+                    style="background-image: linear-gradient(to bottom, rgb(255, 230, 0), rgb(255, 200, 0)); border-color: black;">
+                    <i class='bx bx-gift text-2xl'></i>
+                </div>
+                <h3 class="mt-6 text-black">Special Offers</h3>
+                <p class="my-4 mb-0 font-normal leading-relaxed tracking-wide text-black">
+                    Enjoy exciting discounts, bundled packages, or exclusive deals available only for loyal customers. Don’t miss the chance to get high-quality clothing at more affordable prices!
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+        </div>
+    </section>
+</div>
+</div>
+
+    </section>
+</div>
+
+<section id="product">
+<div class="mx-auto py-10">
+    <h2 class="text-yellow-500 text-center text-3xl font-bold mb-6 z-0">BajuKu <span class="text-black">- Basic Product</span></h2>
+    <div class="relative flex items-center">
+        <button id="scrollLeft" class="absolute left-0 border border-yellow-500 text-yellow-500 rounded-full w-12 h-12 flex items-center justify-center hover:bg-yellow-500 hover:text-white transition z-10">
+            <i class='bx bx-chevron-left'></i>
+        </button>
+
+        <div id="cardContainer" class="flex overflow-x-auto space-x-4 p-4 scrollbar-hide">
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/kaos polos.jpg" alt="Product 1">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">T-Shirt</h3>
+                    <p class="text-gray-600">Description for product 1.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/baju polo.jpeg" alt="Product 2">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">T-Shirt Polo</h3>
+                    <p class="text-gray-600">Description for product 2.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/hoodie.avif" alt="Product 3">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Hoodie</h3>
+                    <p class="text-gray-600">Description for product 3.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/jaket.png" alt="Product 5">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Jacket</h3>
+                    <p class="text-gray-600">Description for product 5.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/kemeja pendek.jpeg" alt="Product 5">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Short-Sleeve Shirt</h3>
+                    <p class="text-gray-600">Description for product 5.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/kemeja.jpg" alt="Product 5">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Long-Sleeve Shirt</h3>
+                    <p class="text-gray-600">Description for product 5.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/jersey basklet.avif" alt="Product 5">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Basketball Jersey</h3>
+                    <p class="text-gray-600">Description for product 5.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/sweater.jpeg" alt="Product 5">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Sweater</h3>
+                    <p class="text-gray-600">Description for product 5.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/jas.jpeg" alt="Product 5">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Coat</h3>
+                    <p class="text-gray-600">Description for product 5.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/baju olahraga.jpg" alt="Product 5">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Sportswear</h3>
+                    <p class="text-gray-600">Description for product 5.</p>
+                </div>
+            </div>
+        </div>
+        <button id="scrollRight" class="absolute right-0 border border-yellow-500 text-yellow-500 rounded-full w-12 h-12 flex items-center justify-center hover:bg-yellow-500 hover:text-white transition z-10">
+            <i class='bx bx-chevron-right'></i>
+        </button>
+    </div>
+</div>
+
+<div class="mx-auto py-10">
+    <div class="relative flex items-center">
+        <button id="scrollLeft2" class="absolute left-0 border border-yellow-500 text-yellow-500 rounded-full w-12 h-12 flex items-center justify-center hover:bg-yellow-500 hover:text-white transition z-10">
+            <i class='bx bx-chevron-left'></i>
+        </button>
+
+        <div id="cardContainer2" class="flex overflow-x-auto space-x-4 p-4 scrollbar-hide">
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/img-a.avif" alt="Product 1">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Jeans</h3>
+                    <p class="text-gray-600">Description for product 1.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/img-b.jpeg" alt="Product 2">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Long Pants</h3>
+                    <p class="text-gray-600">Description for product 2.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/img-c.jpeg" alt="Product 3">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Sweatpants</h3>
+                    <p class="text-gray-600">Description for product 3.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/img-dd.jpeg" alt="Product 5">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Cargo pants</h3>
+                    <p class="text-gray-600">Description for product 5.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/img-e.jpg" alt="Product 5">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Shorts</h3>
+                    <p class="text-gray-600">Description for product 5.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/img-f.jpg" alt="Product 5">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Sports shorts</h3>
+                    <p class="text-gray-600">Description for product 5.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/img-g.jpeg" alt="Product 5">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Denim shorts</h3>
+                    <p class="text-gray-600">Description for product 5.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/img-h.jpeg" alt="Product 5">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Skirt</h3>
+                    <p c lass="text-gray-600">Description for product 5.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/img-i.jpeg" alt="Product 5">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Short skirt</h3>
+                    <p class="text-gray-600">Description for product 5.</p>
+                </div>
+            </div>
+            <div class="card flex-none w-64 rounded-lg shadow-lg bg-white transform transition duration-300 hover:scale-105 cursor-pointer">
+                <img class="rounded-t-lg" src="img/img-j.jpeg" alt="Product 5">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">Long skirt</h3>
+                    <p class="text-gray-600">Description for product 5.</p>
+                </div>
+            </div>
+        </div>
+        <button id="scrollRight2" class="absolute right-0 border border-yellow-500 text-yellow-500 rounded-full w-12 h-12 flex items-center justify-center hover:bg-yellow-500 hover:text-white transition z-10">
+            <i class='bx bx-chevron-right'></i>
+        </button>
+    </div>
+
+    
+</div>
+</section>
+
+<script>
+    const scrollContainer = document.getElementById('cardContainer');
+    const scrollLeftButton = document.getElementById('scrollLeft');
+    const scrollRightButton = document.getElementById('scrollRight');
+
+    scrollLeftButton.addEventListener('click', () => {
+        scrollContainer.scrollBy({
+            left: -200, // Jumlah piksel untuk scroll ke kiri
+            behavior: 'smooth' // Efek scroll yang halus
+        });
+    });
+
+    scrollRightButton.addEventListener('click', () => {
+        scrollContainer.scrollBy({
+            left: 200, // Jumlah piksel untuk scroll ke kanan
+            behavior: 'smooth' // Efek scroll yang halus
+        });
+    });
+
+    const scrollContainer2 = document.getElementById('cardContainer2');
+    const scrollLeftButton2 = document.getElementById('scrollLeft2');
+    const scrollRightButton2 = document.getElementById('scrollRight2');
+
+    scrollLeftButton2.addEventListener('click', () => {
+        scrollContainer2.scrollBy({
+            left: -200,
+            behavior: 'smooth'
+        });
+    });
+
+    scrollRightButton2.addEventListener('click', () => {
+        scrollContainer2.scrollBy({
+            left: 200,
+            behavior: 'smooth'
+        });
+    });
+</script>
+
+<style>
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    .card {
+        position: relative; 
+        z-index: 1;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+
+
+
+<section id="popular-product" class="w-fit mx-auto mt-10 mb-5">
+    <h2 class="text-yellow-500 my-4 font-bold text-3xl sm:text-4xl text-center">BajuKu <span class="text-black">- Popular Product</span></h2>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center gap-y-20 gap-x-14 mt-8">
+        <!-- Item 1 -->
+        <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+            <a href="#">
+                <img src="img/hoodie.avif" alt="Hoodie" class="h-80 w-72 object-cover rounded-t-xl" />
+                <div class="px-4 py-3">
+                    <span class="text-gray-400 mr-3 uppercase text-xs">Popular Product</span>
+                    <p class="text-lg font-bold text-black truncate capitalize">Hoodie</p>
+                    <div class="flex items-center">
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+            <a href="#">
+                <img src="img/jacket.jpeg" alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
+                <div class="px-4 py-3 w-72">
+                    <span class="text-gray-400 mr-3 uppercase text-xs">Popular Product</span>
+                    <p class="text-lg font-bold text-black truncate block capitalize">Jacket <span class="text-yellow-500 font-normal">- Custom</span></p>
+                    <div class="flex items-center">
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+            <a href="#">
+                <img src="img/polo.jpg" alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
+                <div class="px-4 py-3 w-72">
+                    <span class="text-gray-400 mr-3 uppercase text-xs">Popular Product</span>
+                    <p class="text-lg font-bold text-black truncate block capitalize">T-shirt Polo</p>
+                    <div class="flex items-center">
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+            <a href="#">
+                <img src="img/hot pants.avif" alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
+                <div class="px-4 py-3 w-72">
+                    <span class="text-gray-400 mr-3 uppercase text-xs">Popular Product</span>
+                    <p class="text-lg font-bold text-black truncate block capitalize">Hot Pants <span class="text-yellow-500 font-normal">- Custom</span></p>
+                    <div class="flex items-center">
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+            <a href="#">
+                <img src="img/woman clothing.jpg" alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
+                <div class="px-4 py-3 w-72">
+                    <span class="text-gray-400 mr-3 uppercase text-xs">Popular Product</span>
+                    <p class="text-lg font-bold text-black truncate block capitalize">Crop Top <span class="text-yellow-500 font-normal">- Custom</span></p>
+                    <div class="flex items-center">
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+            <a href="#">
+                <img src="img/bawahan.jpeg" alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
+                <div class="px-4 py-3 w-72">
+                    <span class="text-gray-400 mr-3 uppercase text-xs">Popular Product</span>
+                    <p class="text-lg font-bold text-black truncate block capitalize">Palazzo Pants <span class="text-yellow-500 font-normal">- Custom</span></p>
+                    <div class="flex items-center">
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="gallery">
+<div class="p-5 sm:p-8 ">
+    <div class="relative mx-auto max-w-5xl text-center">
+        <h2 class="block w-full bg-gradient-to-b from-yellow-200 to-yellow-500 bg-clip-text font-bold text-transparent text-3xl sm:text-4xl">
+            Customer Gallery
+        </h2>
+        <p class="mx-auto my-4 w-full max-w-full bg-transparent text-center font-medium leading-relaxed tracking-wide text-black">
+            These photos showcase our customers wearing their custom-ordered clothing, giving a real-life view of our products in everyday use. Each image has been published with the customer's permission, and we greatly appreciate their trust in sharing this experience with us
+        </p>
+    </div>
+
+    <div class="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 lg:columns-4 [&>img:not(:first-child)]:mt-8">
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-1.jpg"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-2.jpg"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-3.jpg"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-4.jpg"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-5.jpg"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-6.jpg"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-7.jpg"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-8.jpg"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-9.jpg"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-11.jpg"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-12.jpg"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-10.jpeg"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-13.jpg"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-14.jpeg"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-15.avif"/>
+        <img class="transform transition duration-300 hover:scale-105 cursor-pointer" src="img/img-16.avif"/>
+    </div>
+</div>
+</section>
+
+<section class="relative z-10 overflow-hidden bg-gray-400 py-16 px-8 mt-40">
+    <div class="container">
+        <div class="-mx-4 flex flex-wrap items-center">
+            <div class="w-full px-4 lg:w-1/2">
+                <div class="text-center lg:text-left ">
+                    <div class="mb-10 lg:mb-0 ">
+                        <h1
+                            class="mt-0 mb-3 text-3xl font-bold leading-tight sm:text-4xl sm:leading-tight md:text-[40px] md:leading-tight text-white ">
+                            You Need Help ?</h1>
+                            <p class="mx-auto my-4 w-full max-w-full bg-transparent font-medium leading-relaxed tracking-wide text-white">
+                                If you have any questions or need assistance, please don’t hesitate to contact the number provided. Our team will be happy to help you
+                            </p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full px-4 lg:w-1/2">
+                <div class="text-center lg:text-right">
+                    <a class="font-semibold rounded-lg mx-auto inline-flex items-center justify-center bg-white py-4 px-9 hover:bg-opacity-90 transform transition duration-300 hover:scale-105 cursor-pointer"
+                        href="#"><i class='bx bxl-whatsapp text-4xl'></i>+62 8133 8155 068</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="absolute top-0 right-0 -z-10">
+        <svg width="388" height="250" viewBox="0 0 388 220" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.05" d="M203 -28.5L4.87819e-05 250.5L881.5 250.5L881.5 -28.5002L203 -28.5Z" fill="url(#paint0_linear_971_6910)"></path><defs><linearGradient id="paint0_linear_971_6910" x1="60.5" y1="111" x2="287" y2="111" gradientUnits="userSpaceOnUse"><stop offset="0.520507" stop-color="white"></stop><stop offset="1" stop-color="white" stop-opacity="0"></stop></linearGradient></defs></svg></span><span class="absolute top-0 right-0 -z-10"><svg width="324" height="250" viewBox="0 0 324 220" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.05" d="M203 -28.5L4.87819e-05 250.5L881.5 250.5L881.5 -28.5002L203 -28.5Z" fill="url(#paint0_linear_971_6911)"></path><defs><linearGradient id="paint0_linear_971_6911" x1="60.5" y1="111" x2="287" y2="111" gradientUnits="userSpaceOnUse"><stop offset="0.520507" stop-color="white"></stop><stop offset="1" stop-color="white" stop-opacity="0"></stop></linearGradient></defs></svg></span><span class="absolute top-4 left-4 -z-10"><svg width="43" height="56" viewBox="0 0 43 56" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.5"><circle cx="40.9984" cy="1.49626" r="1.49626" transform="rotate(90 40.9984 1.49626)" fill="white"></circle><circle cx="27.8304" cy="1.49626" r="1.49626" transform="rotate(90 27.8304 1.49626)" fill="white"></circle><circle cx="14.6644" cy="1.49626" r="1.49626" transform="rotate(90 14.6644 1.49626)" fill="white"></circle><circle cx="1.49642" cy="1.49626" r="1.49626" transform="rotate(90 1.49642 1.49626)" fill="white"></circle><circle cx="40.9984" cy="14.6642" r="1.49626" transform="rotate(90 40.9984 14.6642)" fill="white"></circle><circle cx="27.8304" cy="14.6642" r="1.49626" transform="rotate(90 27.8304 14.6642)" fill="white"></circle><circle cx="14.6644" cy="14.6642" r="1.49626" transform="rotate(90 14.6644 14.6642)" fill="white"></circle><circle cx="1.49642" cy="14.6642" r="1.49626" transform="rotate(90 1.49642 14.6642)" fill="white"></circle><circle cx="40.9984" cy="27.8302" r="1.49626" transform="rotate(90 40.9984 27.8302)" fill="white"></circle><circle cx="27.8304" cy="27.8302" r="1.49626" transform="rotate(90 27.8304 27.8302)" fill="white"></circle><circle cx="14.6644" cy="27.8302" r="1.49626" transform="rotate(90 14.6644 27.8302)" fill="white"></circle><circle cx="1.49642" cy="27.8302" r="1.49626" transform="rotate(90 1.49642 27.8302)" fill="white"></circle><circle cx="40.9984" cy="40.9982" r="1.49626" transform="rotate(90 40.9984 40.9982)" fill="white"></circle><circle cx="27.8304" cy="40.9963" r="1.49626" transform="rotate(90 27.8304 40.9963)" fill="white"></circle><circle cx="14.6644" cy="40.9982" r="1.49626" transform="rotate(90 14.6644 40.9982)" fill="white"></circle><circle cx="1.49642" cy="40.9963" r="1.49626" transform="rotate(90 1.49642 40.9963)" fill="white"></circle><circle cx="40.9984" cy="54.1642" r="1.49626" transform="rotate(90 40.9984 54.1642)" fill="white"></circle><circle cx="27.8304" cy="54.1642" r="1.49626" transform="rotate(90 27.8304 54.1642)" fill="white"></circle><circle cx="14.6644" cy="54.1642" r="1.49626" transform="rotate(90 14.6644 54.1642)" fill="white"></circle><circle cx="1.49642" cy="54.1642" r="1.49626" transform="rotate(90 1.49642 54.1642)" fill="white"></circle></g>
+        </svg>
+    </span>
+</section>
+
+
+    <!-- Footer Container -->
+    <footer class="bg-gray-200 text-black py-8">
+        <div class="container mx-auto px-8 lg:px-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service Section -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Service</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:underline">FAQ</a></li>
+                        <li><a href="#about" class="hover:underline">Dashboard</a></li>
+                        <li><a href="#product" class="hover:underline">Basic Product Gallery</a></li>
+                        <li><a href="#popular-product" class="hover:underline">Popular Product</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Contact Us Section -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <p class="text-sm mb-2">Customer Support Operating Hours:<br> 
+                        Monday-Saturday: 08:30 AM - 04:00 PM WIB</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <span class="mr-2">
+                                <i class='bx bxl-whatsapp text-2xl'></i>
+                            </span> 
+                            +62 8133 8155 068
+                        </li>
+                        <li class="flex items-center">
+                            <span class="mr-2">
+                                <i class='bx bxs-phone text-2xl'></i>
+                            </span> 
+                            +62 8133 8155 068
+                        </li>
+                        <li class="flex items-center">
+                            <span class="mr-2">
+                                <i class='bx bxs-envelope text-2xl'></i>
+                            </span>
+                            cs@bajuku.com
+                        </li>
+                    </ul>
+                </div>
+    
+                <!-- Follow Us Section -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <span class="mr-2">
+                                <i class='bx bxl-facebook text-2xl'></i>
+                            </span>
+                            <a href="#" class="hover:underline">BajuKu Official Store</a>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="mr-2">
+                                <i class='bx bxl-instagram text-2xl'></i>
+                            </span>
+                            <a href="#" class="hover:underline">@bajuku.store</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Copyright Section -->
+            <div class="border-t border-black mt-8 pt-4 text-center text-sm text-black">
+                Copyright &copy; 2024 BajuKu.co.id
+            </div>
+        </div>
+    </footer>
+    
+</body>
+</html>
